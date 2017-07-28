@@ -2,7 +2,7 @@ const SPLITTER: f64 = 134217729.0;//math.Pow(2, 27) + 1.0
 
 ///Computes the product of two floating point numbers as a
 /// 2-term nonoverlapping increasing sequence
-pub fn two_product(a: f64, b: f64) -> (f64, f64) {
+pub fn two_product(a: f64, b: f64) -> Vec<f64> {
     let x = a * b;
     let c = SPLITTER * a;
     let abig = c - a;
@@ -20,7 +20,7 @@ pub fn two_product(a: f64, b: f64) -> (f64, f64) {
 
     let y = alo * blo - err3;
 
-    (y, x)
+    vec!(y, x)
 }
 
 
@@ -55,14 +55,14 @@ mod two_prod_test {
         }
         assert!(
             two_product(1.0 + 2f64.powi(-52), 1.0 + 2f64.powi(-52)) ==
-                (2f64.powi(-104), 1.0 + 2f64.powi(-51))
+                [2f64.powi(-104), 1.0 + 2f64.powi(-51)]
         );
         for j in 0..test_values.len() {
             let a = test_values[j];
             assert!(a * a < f64::INFINITY);
-            assert!(two_product(0f64, a)  == (0.0, 0.0));
-            assert!(two_product(1f64, a)  == (0.0,   a));
-            assert!(two_product(-1f64, a) == (0.0,  -a));
+            assert_eq!(two_product(0f64, a)  , [0.0, 0.0]);
+            assert_eq!(two_product(1f64, a)  , [0.0,   a]);
+            assert_eq!(two_product(-1f64, a) , [0.0,  -a]);
         }
     }
 }
