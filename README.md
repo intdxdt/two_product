@@ -1,6 +1,5 @@
-twoproduct
-===========
-Computes the product of two floating point numbers as a 
+# two_product
+Computes the product of two floating point numbers as a
 2-term nonoverlapping increasing sequence.
 
 
