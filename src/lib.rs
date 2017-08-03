@@ -26,14 +26,13 @@ pub fn two_product(a: f64, b: f64) -> Vec<f64> {
 
 #[cfg(test)]
 mod two_prod_test {
-    use super::two_product;
-
     extern crate rand;
-
     use std::f64;
+    use super::two_product;
+    use self::rand::random;
 
-    fn gen() -> f64 {
-        rand::random::<f64>()
+    fn rnd() -> f64 {
+        random::<f64>()
     }
 
     #[test]
@@ -44,19 +43,27 @@ mod two_prod_test {
             2f64.powi(-500), 2f64.powi(500),
             2.0, 0.5, 3.0, 1.5, 0.1, 0.3, 0.7,
         ];
+
         for _ in 0..20 {
-            test_values.push(gen());
-            test_values.push(gen() * (2f64.powf(1000.0 * gen() - 500.0)));
+            test_values.push(rnd());
+            test_values.push(
+                rnd() * (2f64.powf(1000.0 * rnd() - 500.0))
+            );
         }
+
         let n = test_values.len();
         for i in (1..n).rev() {
             let x = test_values[i];
             test_values.push(-x)
         }
+
         assert!(
-            two_product(1.0 + 2f64.powi(-52), 1.0 + 2f64.powi(-52)) ==
-                [2f64.powi(-104), 1.0 + 2f64.powi(-51)]
+            two_product(
+                1.0 + 2f64.powi(-52),
+                1.0 + 2f64.powi(-52)
+            ) == [2f64.powi(-104), 1.0 + 2f64.powi(-51)]
         );
+
         for j in 0..test_values.len() {
             let a = test_values[j];
             assert!(a * a < f64::INFINITY);
