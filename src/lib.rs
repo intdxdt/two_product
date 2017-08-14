@@ -2,7 +2,7 @@ const SPLITTER: f64 = 134217729.0;//math.Pow(2, 27) + 1.0
 
 ///Computes the product of two floating point numbers as a
 /// 2-term nonoverlapping increasing sequence
-pub fn two_product(a: f64, b: f64) -> [f64; 2] {
+pub fn two_product(a: f64, b: f64) -> Vec<f64> {
     let x = a * b;
     let c = SPLITTER * a;
     let abig = c - a;
@@ -20,7 +20,7 @@ pub fn two_product(a: f64, b: f64) -> [f64; 2] {
 
     let y = alo * blo - err3;
 
-    [y, x]
+    vec!(y, x)
 }
 
 
