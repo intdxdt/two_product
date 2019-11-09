@@ -2,6 +2,7 @@
 name = "two_product"
 version = "0.1.0"
 authors = ["Titus Tienaah <titus.intdxdt@gmail.com>"]
+edition="2018"
 
 [dependencies]
 
